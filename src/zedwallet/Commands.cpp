@@ -1,4 +1,5 @@
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 // 
 // Please see the included LICENSE file for more information.
 
@@ -14,9 +15,9 @@ std::vector<Command> startupCommands()
     {
         Command("open", "Open a wallet already on your system"),
         Command("create", "Create a new wallet"),
-        Command("seed_restore", "Restore a wallet using a seed phrase of words"),
-        Command("key_restore", "Restore a wallet using a view and spend key"),
-        Command("view_wallet", "Import a view only wallet"),
+        Command("seed-restore", "Restore a wallet using a seed phrase of words"),
+        Command("key-restore", "Restore a wallet using a view and spend key"),
+        Command("view-wallet", "Import a view only wallet"),
         Command("exit", "Exit the program"),
     };
 }
@@ -25,7 +26,7 @@ std::vector<Command> nodeDownCommands()
 {
     return
     {
-        Command("try_again", "Try to connect to the node again"),
+        Command("try-again", "Try to connect to the node again"),
         Command("continue", "Continue to the wallet interface regardless"),
         Command("exit", "Exit the program"),
     };
@@ -45,20 +46,20 @@ std::vector<AdvancedCommand> allCommands()
         AdvancedCommand("transfer", "Send " + WalletConfig::ticker + " to someone", false, false),
         
         /* Advanced commands */
-        AdvancedCommand("ab_add", "Add a person to your address book", true, true),
-        AdvancedCommand("ab_delete", "Delete a person in your address book", true, true),
-        AdvancedCommand("ab_list", "List everyone in your address book", true, true),
-        AdvancedCommand("ab_send", "Send " + WalletConfig::ticker + " to someone in your address book", false, true),
-        AdvancedCommand("change_password", "Change your wallet password", true, true),
-        AdvancedCommand("make_integrated_address", "Make a combined address + payment ID", true, true),
-        AdvancedCommand("incoming_transfers", "Show incoming transfers", true, true),
-        AdvancedCommand("list_transfers", "Show all transfers", false, true),
+        AdvancedCommand("add-contact", "Add a person to your contact list", true, true),
+        AdvancedCommand("delete-contact", "Delete a person in your contact list", true, true),
+        AdvancedCommand("contact-list", "List everyone in your contact list", true, true),
+        AdvancedCommand("contact-send", "Send " + WalletConfig::ticker + " to someone in your contact list", false, true),
+        AdvancedCommand("change-password", "Change your wallet password", true, true),
+        AdvancedCommand("make-integrated-address", "Make a combined address + payment ID", true, true),
+        AdvancedCommand("incoming-transfers", "Show incoming transfers", true, true),
+        AdvancedCommand("list-transfers", "Show all transfers", false, true),
         AdvancedCommand("optimize", "Optimize your wallet to send large amounts", false, true),
-        AdvancedCommand("outgoing_transfers", "Show outgoing transfers", false, true),
+        AdvancedCommand("outgoing-transfers", "Show outgoing transfers", false, true),
         AdvancedCommand("reset", "Recheck the chain from zero for transactions", true, true),
         AdvancedCommand("save", "Save your wallet state", true, true),
-        AdvancedCommand("save_csv", "Save all wallet transactions to a CSV file", true, true),
-        AdvancedCommand("send_all", "Send all your balance to someone", false, true),
+        AdvancedCommand("save-csv", "Save all wallet transactions to a CSV file", true, true),
+        AdvancedCommand("send-all", "Send all your balance to someone", false, true),
         AdvancedCommand("status", "Display sync status and network hashrate", true, true),
     };
 }

@@ -1,4 +1,5 @@
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 // 
 // Please see the included LICENSE file for more information.
 
@@ -48,36 +49,36 @@ bool handleCommand(const std::string command,
                  node.feeAddress(), node.feeAmount());
     }
     /* Advanced commands */
-    else if (command == "ab_add")
+    else if (command == "add-contact")
     {
         addToAddressBook();
     }
-    else if (command == "ab_delete")
+    else if (command == "delete-contact")
     {
         deleteFromAddressBook();
     }
-    else if (command == "ab_list")
+    else if (command == "contact-list")
     {
         listAddressBook();
     }
-    else if (command == "ab_send")
+    else if (command == "contact-send")
     {
         sendFromAddressBook(walletInfo, node.getLastKnownBlockHeight(),
                             node.feeAddress(), node.feeAmount());
     }
-    else if (command == "change_password")
+    else if (command == "change-password")
     {
         changePassword(walletInfo);
     }
-    else if (command == "make_integrated_address")
+    else if (command == "make-integrated-address")
     {
         createIntegratedAddress();
     }
-    else if (command == "incoming_transfers")
+    else if (command == "incoming-transfers")
     {
         listTransfers(true, false, walletInfo->wallet, node);
     }
-    else if (command == "list_transfers")
+    else if (command == "list-transfers")
     {
         listTransfers(true, true, walletInfo->wallet, node);
     }
@@ -85,7 +86,7 @@ bool handleCommand(const std::string command,
     {
         fullOptimize(walletInfo->wallet, node.getLastKnownBlockHeight());
     }
-    else if (command == "outgoing_transfers")
+    else if (command == "outgoing-transfers")
     {
         listTransfers(false, true, walletInfo->wallet, node);
     }
@@ -97,11 +98,11 @@ bool handleCommand(const std::string command,
     {
         save(walletInfo->wallet);
     }
-    else if (command == "save_csv")
+    else if (command == "save-csv")
     {
         saveCSV(walletInfo->wallet, node);
     }
-    else if (command == "send_all")
+    else if (command == "send-all")
     {
         transfer(walletInfo, node.getLastKnownBlockHeight(), true,
                  node.feeAddress(), node.feeAmount());
@@ -131,15 +132,15 @@ std::shared_ptr<WalletInfo> handleLaunchCommand(CryptoNote::WalletGreen &wallet,
     {
         return openWallet(wallet, config);
     }
-    else if (launchCommand == "seed_restore")
+    else if (launchCommand == "seed-restore")
     {
         return mnemonicImportWallet(wallet);
     }
-    else if (launchCommand == "key_restore")
+    else if (launchCommand == "key-restore")
     {
         return importWallet(wallet);
     }
-    else if (launchCommand == "view_wallet")
+    else if (launchCommand == "view-wallet")
     {
         return createViewWallet(wallet);
     }
