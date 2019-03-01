@@ -1987,6 +1987,12 @@ std::error_code Core::validateBlock(const CachedBlock& cachedBlock, IBlockchainC
     return error::TransactionValidationError::WRONG_TRANSACTION_UNLOCK_TIME;
   }
 
+  if (cachedBlock.getBlockIndex() >= CryptoNote::parameters::UPGRADE_HEIGHT_V2
+      && !block.baseTransaction.signatures.empty())
+  {
+    return error::TransactionValidationError::BASE_INVALID_SIGNATURES_COUNT;
+  }
+
   for (const auto& output : block.baseTransaction.outputs) {
     if (output.amount == 0) {
       return error::TransactionValidationError::OUTPUT_ZERO_AMOUNT;
