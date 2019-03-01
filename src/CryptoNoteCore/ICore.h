@@ -1,5 +1,6 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 //
 // Please see the included LICENSE file for more information.
 
@@ -8,6 +9,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <optional>
 #include <CryptoNote.h>
 
 #include "AddBlockErrors.h"
@@ -73,6 +75,12 @@ public:
     std::unordered_set<Crypto::Hash> &transactionsUnknown) const = 0;
 
   virtual bool hasTransaction(const Crypto::Hash& transactionHash) const = 0;
+  /*!
+   * \brief getTransaction Queries a single transaction details blob from the chain or transaction pool
+   * \param hash The hash of the transaction
+   * \return The binary blob of the queried transaction, or none if the transaction does not exist.
+   */
+  virtual std::optional<BinaryArray> getTransaction(const Crypto::Hash& hash) const = 0;
   virtual void getTransactions(const std::vector<Crypto::Hash>& transactionHashes,
                                std::vector<BinaryArray>& transactions,
                                std::vector<Crypto::Hash>& missedHashes) const = 0;

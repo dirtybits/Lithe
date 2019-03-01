@@ -1,4 +1,5 @@
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 //
 // Please see the included LICENSE file for more information.
 
@@ -32,6 +33,7 @@ namespace PaymentService {
       unregisterService = false;
       printAddresses = false;
       syncFromZero = false;
+      initTimeout = 10;
     }
 
     std::string daemonAddress;
@@ -46,6 +48,7 @@ namespace PaymentService {
     int daemonPort;
     int bindPort;
     int logLevel;
+    int initTimeout;
 
     bool legacySecurity;
 

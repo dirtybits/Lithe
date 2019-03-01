@@ -2,6 +2,7 @@
 // Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2018, The BBSCoin Developers
 // Copyright (c) 2018, The Karbo Developers
+// Copyright (c) 2019, The Galaxia Project Developers
 // Copyright (c) 2018-2019, The TurtleCoin Developers
 // Copyright (c) 2019, The Lithe Project Development Team
 //
@@ -2294,6 +2295,16 @@ size_t WalletGreen::validateSaveAndSendTransaction(const ITransactionReader& tra
   if (!fromBinaryArray(cryptoNoteTransaction, transactionData)) {
     m_logger(ERROR, BRIGHT_RED) << "Failed to deserialize created transaction. Transaction hash " << transaction.getTransactionHash();
     throw std::system_error(make_error_code(error::INTERNAL_WALLET_ERROR), "Failed to deserialize created transaction");
+  }
+
+  if (cryptoNoteTransaction.extra.size() >= CryptoNote::parameters::MAX_EXTRA_SIZE)
+  {
+      m_logger(ERROR, BRIGHT_RED) << "Transaction extra is too large. Allowed: "
+                                  << CryptoNote::parameters::MAX_EXTRA_SIZE
+                                  << ", actual: " << cryptoNoteTransaction.extra.size()
+                                  << ".";
+
+      throw std::system_error(make_error_code(error::EXTRA_TOO_LARGE), "Transaction extra too large");
   }
 
   uint64_t fee = transaction.getInputTotalAmount() - transaction.getOutputTotalAmount();
