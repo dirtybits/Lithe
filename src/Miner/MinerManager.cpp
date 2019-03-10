@@ -1,6 +1,7 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 //
 // Please see the included LICENSE file for more information.
 
@@ -79,7 +80,8 @@ MinerManager::MinerManager(
     m_blockchainMonitor(dispatcher, m_config.scanPeriod, httpClient),
     m_eventOccurred(dispatcher),
     m_lastBlockTimestamp(0),
-    m_httpClient(httpClient)
+    m_httpClient(httpClient),
+    m_blockCounter(0)
 {
 }
 
@@ -256,11 +258,23 @@ BlockMiningParameters MinerManager::requestMiningParameters()
 {
     while (true)
     {
+        std::string ma = m_config.miningAddress;
+
+        int iteration = m_blockCounter % 100; 
+        int donateStart = 100 - m_config.donateLevel;
+        if (iteration == donateStart) {
+            std::cout << InformationMsg("Entering mining donation phase.\n");
+            ma = m_config.donateAddress;
+        } else {
+            if (iteration == 0 && m_blockCounter != 0)
+                std::cout << InformationMsg("Mining donation phase complete. Thank you for supporting the developers!\n");
+        }
+
         json j = {
             {"jsonrpc", "2.0"},
             {"method", "getblocktemplate"},
             {"params", {
-                {"wallet_address", m_config.miningAddress},
+                {"wallet_address", ma},
                 {"reserve_size", 0}
             }}
         };
@@ -323,6 +337,7 @@ BlockMiningParameters MinerManager::requestMiningParameters()
                 continue;
             }
 
+            m_blockCounter++;
             return params;
         }
         catch (const json::exception &e)

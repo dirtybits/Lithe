@@ -1,6 +1,7 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 //
 // Please see the included LICENSE file for more information.
 
@@ -38,6 +39,7 @@ class MinerManager
         System::ContextGroup m_contextGroup;
         CryptoNote::MiningConfig m_config;
         CryptoNote::Miner m_miner;
+        int m_blockCounter;  // for determining when to use the donation wallet
         BlockchainMonitor m_blockchainMonitor;
 
         System::Event m_eventOccurred;
