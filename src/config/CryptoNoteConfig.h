@@ -37,7 +37,7 @@ static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED
 /* Premine amount */
 const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(0);
 
-const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff000188f3b501029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd088071210142694232c5b04151d9e4c27d31ec7a68ea568b19488cfcb422659a07a0e44dd5";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "b0019cb8a4abd5ca150000210119f5bb604c1c3af1599ad14b67157ff1c9446a403275fac9d37dbc06b4b7047a";
 static_assert(sizeof(GENESIS_COINBASE_TX_HEX)/sizeof(*GENESIS_COINBASE_TX_HEX) != 1, "GENESIS_COINBASE_TX_HEX must not be empty.");
 
 /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
@@ -183,6 +183,8 @@ const static   boost::uuids::uuid CRYPTONOTE_NETWORK         =
 };
 
 const char* const SEED_NODES[] = {
-  "http://localhost:25501"
+  "145.239.31.156:25501", /* POLAND, EU */
+  "45.77.208.41:25501",   /* SEATTLE, US */
+  "5.172.219.174:25501"    /* NETHERLANDS, EU */
 };
 } // CryptoNote
