@@ -41,7 +41,7 @@ const char     GENESIS_COINBASE_TX_HEX[]                     = "b0019cb8a4abd5ca
 static_assert(sizeof(GENESIS_COINBASE_TX_HEX)/sizeof(*GENESIS_COINBASE_TX_HEX) != 1, "GENESIS_COINBASE_TX_HEX must not be empty.");
 
 /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
-   You can get this value by doing "print_block 2" in TurtleCoind. It is used to know what timestamp
+   You can get this value by doing "print_block 2" in Lithed. It is used to know what timestamp
    to import from when the block height cannot be found in the node or the node is offline. */
 const uint64_t GENESIS_BLOCK_TIMESTAMP                       = 1512800692;
 
@@ -56,7 +56,7 @@ const size_t   CRYPTONOTE_DISPLAY_DECIMAL_POINT              = 5;
 
 const uint64_t MINIMUM_FEE                                   = UINT64_C(10);
 
-/* The mixin to use by default with zedwallet and turtle-service */
+/* The mixin to use by default with zedwallet and lithe-service */
 const uint64_t DEFAULT_MIXIN                                 = 1;
 
 const uint64_t DEFAULT_DUST_THRESHOLD                        = UINT64_C(0);
@@ -179,12 +179,13 @@ const char     LATEST_VERSION_URL[]                          = "http://github.co
 const std::string LICENSE_URL                                = "https://github.com/lithe-project/lithe/blob/master/LICENSE";
 const static   boost::uuids::uuid CRYPTONOTE_NETWORK         =
 {
-    {  0x6c, 0x69, 0x74, 0x68, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74  }
+    {  0x6c, 0x69, 0x74, 0x68, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x64  }
 };
 
 const char* const SEED_NODES[] = {
   "145.239.31.156:25501", /* POLAND, EU */
   "45.77.208.41:25501",   /* SEATTLE, US */
-  "5.172.219.174:25501"    /* NETHERLANDS, EU */
+  "5.172.219.174:25501",  /* NETHERLANDS, EU */
+  "54.39.181.10:25501"    /* CANADA */
 };
 } // CryptoNote

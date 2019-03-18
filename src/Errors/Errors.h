@@ -61,7 +61,7 @@ enum ErrorCode
     ADDRESS_WRONG_LENGTH = 12,
 
     /* The address does not have the correct prefix, e.g. does not begin with
-       TRTL (or whatever is specified in WalletConfig::addressPrefix) */
+       LITHE */
     ADDRESS_WRONG_PREFIX = 13,
 
     /* The address is not fully comprised of base58 characters */
