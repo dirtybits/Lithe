@@ -37,11 +37,11 @@ static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED
 /* Premine amount */
 const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(0);
 
-const char     GENESIS_COINBASE_TX_HEX[]                     = "b0019cb8a4abd5ca150000210119f5bb604c1c3af1599ad14b67157ff1c9446a403275fac9d37dbc06b4b7047a";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "017801ff0001e49b9c0202afd65a3e7f645b297d3463f24708842ccbb019b83390e4093386367814b8d75621011b326e9ba3c1d5aba0b132b898a16ec6402f5ba57f3f62f2df6ebf2fe13d55fe";
 static_assert(sizeof(GENESIS_COINBASE_TX_HEX)/sizeof(*GENESIS_COINBASE_TX_HEX) != 1, "GENESIS_COINBASE_TX_HEX must not be empty.");
 
 /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
-   You can get this value by doing "print_block 2" in Lithed. It is used to know what timestamp
+   You can get this value by doing "print_block 2" in TurtleCoind. It is used to know what timestamp
    to import from when the block height cannot be found in the node or the node is offline. */
 const uint64_t GENESIS_BLOCK_TIMESTAMP                       = 1512800692;
 
@@ -56,7 +56,7 @@ const size_t   CRYPTONOTE_DISPLAY_DECIMAL_POINT              = 5;
 
 const uint64_t MINIMUM_FEE                                   = UINT64_C(10);
 
-/* The mixin to use by default with zedwallet and lithe-service */
+/* The mixin to use by default with zedwallet and turtle-service */
 const uint64_t DEFAULT_MIXIN                                 = 1;
 
 const uint64_t DEFAULT_DUST_THRESHOLD                        = UINT64_C(0);
@@ -183,9 +183,9 @@ const static   boost::uuids::uuid CRYPTONOTE_NETWORK         =
 };
 
 const char* const SEED_NODES[] = {
-  "145.239.31.156:25501", /* POLAND, EU */
-  "45.77.208.41:25501",   /* SEATTLE, US */
-  "5.172.219.174:25501",  /* NETHERLANDS, EU */
-  "54.39.181.10:25501"    /* CANADA */
+  "145.239.31.156:25500", /* POLAND, EU */
+  "45.77.208.41:25500",   /* SEATTLE, US */
+  "5.172.219.174:25500",  /* NETHERLANDS, EU */
+  "54.39.181.10:25500"    /* CANADA */
 };
 } // CryptoNote
