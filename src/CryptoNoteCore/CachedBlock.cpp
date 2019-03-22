@@ -52,11 +52,11 @@ const Crypto::Hash& CachedBlock::getBlockLongHash() const {
     if (block.majorVersion == BLOCK_MAJOR_VERSION_1) {
       const auto& rawHashingBlock = getBlockHashingBinaryArray();
       blockLongHash = Hash();
-      cn_turtle_lite_slow_hash_v1(rawHashingBlock.data(), rawHashingBlock.size(), blockLongHash.get());
+      cn_turtle_slow_hash_v1(rawHashingBlock.data(), rawHashingBlock.size(), blockLongHash.get());
     } else if ((block.majorVersion == BLOCK_MAJOR_VERSION_2) || (block.majorVersion == BLOCK_MAJOR_VERSION_3)) {
       const auto& rawHashingBlock = getParentBlockHashingBinaryArray(true);
       blockLongHash = Hash();
-      cn_turtle_lite_slow_hash_v2(rawHashingBlock.data(), rawHashingBlock.size(), blockLongHash.get());
+      cn_turtle_slow_hash_v2(rawHashingBlock.data(), rawHashingBlock.size(), blockLongHash.get());
     } else {
       throw std::runtime_error("Unknown block major version.");
     }
