@@ -37,7 +37,7 @@ static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED
 /* Premine amount */
 const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(0);
 
-const char     GENESIS_COINBASE_TX_HEX[]                     = "017801ff000100020867b3bfdfc83e33da8be88f65d7dd062f770083a18b8daaa7c81e9ec23d421e21014793eafd708c75edf3c30407b993b4ac421ca41779030f5668f411d08232e550";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "017801ff0001e49b9c0202d01089561c1fe05095e5f7f1cba26a4eed1a5e6308a65015340e3473f9f549612101da0f282e9c72616b8cbb98145687ef25c425a340a4d4b1ce434eb2b857429725";
 static_assert(sizeof(GENESIS_COINBASE_TX_HEX)/sizeof(*GENESIS_COINBASE_TX_HEX) != 1, "GENESIS_COINBASE_TX_HEX must not be empty.");
 
 /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
@@ -179,7 +179,7 @@ const char     LATEST_VERSION_URL[]                          = "http://github.co
 const std::string LICENSE_URL                                = "https://github.com/lithe-project/lithe/blob/master/LICENSE";
 const static   boost::uuids::uuid CRYPTONOTE_NETWORK         =
 {
-    {  0x6c, 0x69, 0x74, 0x68, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x33  }
+    {  0x6c, 0x69, 0x74, 0x68, 0x65, 0x20, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x32  }
 };
 
 const char* const SEED_NODES[] = {
