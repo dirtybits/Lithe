@@ -1,4 +1,6 @@
-// Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2018-2019, The TurtleCoin Developers
+// Copyright (c) 2018-2019, The Calex Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 // 
 // Please see the included LICENSE file for more information.
 
@@ -315,7 +317,7 @@ BlockScanTmpInfo WalletSynchronizer::processBlockTransactions(
 
         if (tx)
         {
-            txData.transactionsToAdd.push_back(tx.value());
+            txData.transactionsToAdd.push_back(*tx);
         }
     }
 
@@ -327,7 +329,7 @@ BlockScanTmpInfo WalletSynchronizer::processBlockTransactions(
 
         if (tx)
         {
-            txData.transactionsToAdd.push_back(tx.value());
+            txData.transactionsToAdd.push_back(*tx);
 
             txData.keyImagesToMarkSpent.insert(
                 txData.keyImagesToMarkSpent.end(),
