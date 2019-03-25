@@ -1,6 +1,7 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2018-2019, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 //
 // Please see the included LICENSE file for more information.
 
@@ -35,7 +36,7 @@ BlockTemplate Miner::mine(const BlockMiningParameters& blockMiningParameters, si
 {
     if (threadCount == 0)
     {
-        throw std::runtime_error("Miner requires at least one thread");
+        throw std::runtime_error("Mining requires at least one thread");
     }
 
     if (m_state == MiningState::MINING_IN_PROGRESS)
@@ -69,9 +70,9 @@ void Miner::stop()
 
 void Miner::runWorkers(BlockMiningParameters blockMiningParameters, size_t threadCount)
 {
-    std::cout << InformationMsg("Started mining for difficulty of ")
+    std::cout << InformationMsg("The current difficulty is ")
               << InformationMsg(blockMiningParameters.difficulty)
-              << InformationMsg(". Good luck! ;)\n");
+              << InformationMsg(".\n");
 
     try
     {

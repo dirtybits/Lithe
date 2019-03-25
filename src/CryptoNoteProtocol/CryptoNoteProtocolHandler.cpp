@@ -278,15 +278,15 @@ bool CryptoNoteProtocolHandler::process_payload_sync_data(const CORE_SYNC_DATA& 
         ss << "(" << Utilities::get_sync_percentage(currentHeight, remoteHeight)
           << "% complete) ";
 
-        ss << "You are " << diff << " blocks (" << days << " days) behind ";
+        ss << "You're " << diff << " blocks (" << days << " days) behind ";
     }
     /* We're ahead of the remote node, no need to print percentages */
     else
     {
-        ss << "You are " << std::abs(diff) << " blocks (" << days << " days) ahead ";
+        ss << "You're " << std::abs(diff) << " blocks (" << days << " days) ahead ";
     }
 
-    ss << "the current peer you're connected to. Slow and steady wins the race! ";
+    ss << "the current peer you're connected to.";
 
     auto logLevel = Logging::TRACE;
     /* Log at different levels depending upon if we're ahead, behind, and if it's
@@ -771,12 +771,11 @@ bool CryptoNoteProtocolHandler::on_connection_synchronized() {
   if (m_synchronized.compare_exchange_strong(val_expected, true)) {
     logger(Logging::INFO)
       << ENDL ;
-      logger(INFO, BRIGHT_MAGENTA) << "===[ " + std::string(CryptoNote::CRYPTONOTE_NAME) + " Tip! ]=============================" << ENDL ;
-      logger(INFO, WHITE) << " Always exit " + WalletConfig::daemonName + " and " + WalletConfig::walletName + " with the \"exit\" command to preserve your chain and wallet data." << ENDL ;
-      logger(INFO, WHITE) << " Use the \"help\" command to see a list of available commands." << ENDL ;
-      logger(INFO, WHITE) << " Use the \"backup\" command in " + WalletConfig::walletName + " to display your keys/seed for restoring a corrupted wallet." << ENDL ;
-      logger(INFO, WHITE) << " If you need more assistance, you can contact us for support at " + WalletConfig::contactLink << ENDL;
-      logger(INFO, BRIGHT_MAGENTA) << "===================================================" << ENDL << ENDL ;
+      logger(INFO, BRIGHT_WHITE) << "╔══════════════════════════════════════════[ " + std::string(CryptoNote::CRYPTONOTE_NAME) + " Tip! ]═══════════════════════════════════════════╗" << ENDL ;
+      logger(INFO, BRIGHT_WHITE) << "║ Always exit " + WalletConfig::daemonName + " and " + WalletConfig::walletName + " with the \"exit\" command to preserve your chain and wallet data.  ║" << ENDL ;
+      logger(INFO, BRIGHT_WHITE) << "║                   Use the \"help\" command to see a list of available commands.                     ║" << ENDL ;
+      logger(INFO, BRIGHT_WHITE) << "║    If you need more assistance, you can contact us for support at  " + WalletConfig::contactLink + "     ║" << ENDL;
+      logger(INFO, BRIGHT_WHITE) << "╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝" << ENDL << ENDL ;
 
       logger(INFO, BRIGHT_MAGENTA) << asciiArt << ENDL;
 
@@ -908,18 +907,6 @@ void CryptoNoteProtocolHandler::relayBlock(NOTIFY_NEW_BLOCK::request& arg) {
   logger(Logging::DEBUGGING) << "NOTIFY_NEW_LITE_BLOCK - MSG_SIZE = " << lite_buf.size();
 
   std::list<boost::uuids::uuid> liteBlockConnections, normalBlockConnections;
-
-  // sort the peers into their support categories.
-  m_p2p->for_each_connection([this, &liteBlockConnections, &normalBlockConnections](const CryptoNoteConnectionContext& ctx, uint64_t peerId){
-    if (ctx.version >= P2P_LITE_BLOCKS_PROPOGATION_VERSION) {
-      logger(Logging::DEBUGGING) << ctx << "Peer supports lite-blocks... adding peer to lite block list";
-      liteBlockConnections.push_back(ctx.m_connection_id);
-    }
-    else {
-      logger(Logging::DEBUGGING) << ctx << "Peer doesn't support lite-blocks... adding peer to normal block list";
-      normalBlockConnections.push_back(ctx.m_connection_id);
-    }
-  });
 
   // first send lite one's.. coz they are faster
   if(!liteBlockConnections.empty()) {

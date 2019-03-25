@@ -1,4 +1,5 @@
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 // 
 // Please see the included LICENSE file for more information.
 
@@ -79,10 +80,10 @@ class SuccessMsg : public ColouredMsg<T>
 {
     public:
         explicit SuccessMsg(T msg) 
-               : ColouredMsg<T>(msg, Common::Console::Color::Green) {}
+               : ColouredMsg<T>(msg, Common::Console::Color::BrightWhite) {}
 
         explicit SuccessMsg(T msg, int padding)
-               : ColouredMsg<T>(msg, padding, Common::Console::Color::Green) {}
+               : ColouredMsg<T>(msg, padding, Common::Console::Color::BrightWhite) {}
 };
 
 template<typename T>
@@ -90,10 +91,10 @@ class InformationMsg : public ColouredMsg<T>
 {
     public:
         explicit InformationMsg(T msg) 
-               : ColouredMsg<T>(msg, Common::Console::Color::BrightYellow) {}
+               : ColouredMsg<T>(msg, Common::Console::Color::BrightMagenta) {}
 
         explicit InformationMsg(T msg, int padding)
-               : ColouredMsg<T>(msg, padding, Common::Console::Color::BrightYellow) {}
+               : ColouredMsg<T>(msg, padding, Common::Console::Color::BrightMagenta) {}
 };
 
 template<typename T>
