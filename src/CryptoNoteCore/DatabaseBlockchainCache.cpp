@@ -1,6 +1,7 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2018-2019, The TurtleCoin Developers
+// Copyright (c) 2018-2019, The Calex Developers
 // Copyright (c) 2019, The Lithe Project Development Team
 //
 // Please see the included LICENSE file for more information.
@@ -967,8 +968,13 @@ bool DatabaseBlockchainCache::isTransactionSpendTimeUnlocked(uint64_t unlockTime
     return blockIndex + currency.lockedTxAllowedDeltaBlocks() >= unlockTime;
   }
 
-  // interpret as time
-  return static_cast<uint64_t>(time(nullptr)) + currency.lockedTxAllowedDeltaSeconds() >= unlockTime;
+  // Retrieve the last block timestamp
+  std::vector<uint64_t> lastBlockTimestamps = getLastTimestamps(1);
+  assert(lastBlockTimestamps.size() == 1);
+
+  /* Check to see if the unlockTime specified is less than or equal
+     to the last block timestamp plus our configured delta limit */
+  return lastBlockTimestamps[0] + currency.lockedTxAllowedDeltaSeconds() >= unlockTime;
 }
 
 ExtractOutputKeysResult

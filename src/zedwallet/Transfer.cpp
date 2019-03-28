@@ -1,4 +1,6 @@
 // Copyright (c) 2018, The TurtleCoin Developers
+// Copyright (c) 2018-2019, The Calex Developers
+// Copyright (c) 2019, The Lithe Project Development Team
 // 
 // Please see the included LICENSE file for more information.
 
@@ -101,7 +103,8 @@ bool confirmTransaction(CryptoNote::TransactionParameters t,
               << SuccessMsg(formatAmount(t.destinations[0].amount))
               << ", with a network fee of " << SuccessMsg(formatAmount(t.fee))
               << "," << std::endl
-              << "and a node fee of " << SuccessMsg(formatAmount(nodeFee));
+              << "and a node fee of " << SuccessMsg(formatAmount(nodeFee))
+              << " and will unlock for spending at block " << WarningMsg(std::to_string(t.unlockTimestamp)) << std::endl;
 
     const std::string paymentID = getPaymentIDFromExtra(t.extra);
 
@@ -550,6 +553,20 @@ void doTransfer(std::string address, uint64_t amount, uint64_t fee,
     p.fee = fee;
     p.mixIn = static_cast<uint16_t>(mixin);
     p.extra = extra;
+
+    //@BEGIN Modification For Coin Lock
+    std::cout
+        << InformationMsg("Do you want to lock this transaction until a certain block?")
+        << std::endl
+        << "Hit enter for no unlock time: ";
+    std::string unlockTime;
+    std::getline(std::cin, unlockTime);
+
+    if(!unlockTime.empty()){
+        p.unlockTimestamp = std::stoul(unlockTime);
+    } 
+    //@END Modification For Coin Lock
+
     p.changeDestination = walletInfo->walletAddress;
 
     if (!confirmTransaction(p, walletInfo, integratedAddress, nodeFee,
